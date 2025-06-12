@@ -5,7 +5,6 @@ import Head from 'next/head';
 export default function Home() {
   const [input, setInput] = useState('');
   const [response, setResponse] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
@@ -18,10 +17,6 @@ export default function Home() {
 
     const data = await res.json();
     setResponse(data.reply);
-
-    const urlMatch = data.reply.match(/(https?:\/\/[^\s]+\.(jpg|jpeg|png|webp))/i);
-    setImageUrl(urlMatch ? urlMatch[0] : '');
-
     setLoading(false);
   };
 
@@ -32,7 +27,7 @@ export default function Home() {
           body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to bottom right, #f0f8ff, #e6f0ff);
+            background: linear-gradient(to bottom right, #fff0f5, #e0f7fa);
           }
 
           .container {
@@ -46,7 +41,7 @@ export default function Home() {
 
           nav {
             width: 100%;
-            background-color: #1e3a8a;
+            background-color: #d63384;
             color: white;
             padding: 1rem 2rem;
             display: flex;
@@ -68,7 +63,7 @@ export default function Home() {
           }
 
           nav li:hover {
-            color: #ffd700;
+            color: #ffc107;
           }
 
           .main-content {
@@ -81,7 +76,7 @@ export default function Home() {
           h2 {
             font-size: 2.5rem;
             font-weight: bold;
-            color: #1e3a8a;
+            color: #d63384;
             margin-bottom: 1rem;
             animation: slideIn 0.8s ease-out;
           }
@@ -94,7 +89,7 @@ export default function Home() {
           textarea {
             width: 100%;
             padding: 1rem;
-            border: 2px solid #60a5fa;
+            border: 2px solid #ffb3c6;
             border-radius: 0.5rem;
             margin-bottom: 1rem;
             font-size: 1rem;
@@ -105,12 +100,12 @@ export default function Home() {
 
           textarea:focus {
             outline: none;
-            border-color: #2563eb;
+            border-color: #d63384;
             transform: scale(1.02);
           }
 
           button {
-            background: linear-gradient(to right, #2563eb, #1e40af);
+            background: linear-gradient(to right, #ff69b4, #d63384);
             color: white;
             padding: 0.75rem 2rem;
             font-weight: 600;
@@ -123,13 +118,13 @@ export default function Home() {
 
           button:hover {
             transform: scale(1.05);
-            background: linear-gradient(to right, #1e40af, #1e3a8a);
+            background: linear-gradient(to right, #d63384, #c2185b);
           }
 
           .response-box {
             margin-top: 2rem;
             background: white;
-            border: 1px solid #bfdbfe;
+            border: 1px solid #f8bbd0;
             padding: 1.5rem;
             border-radius: 1rem;
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
@@ -141,57 +136,47 @@ export default function Home() {
             to { opacity: 1; transform: scale(1); }
           }
 
-          .response-box img {
-            margin-top: 1rem;
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 0.5rem;
-          }
-
           footer {
             margin-top: 3rem;
             padding: 1rem;
             text-align: center;
             color: #6b7280;
-            border-top: 1px solid #dbeafe;
+            border-top: 1px solid #f8bbd0;
           }
         `}</style>
       </Head>
 
       <nav>
-        <h1>URWISH</h1>
+        <h1>GlowCare</h1>
         <ul>
           <li>Home</li>
-          <li>About</li>
+          <li>Shop</li>
           <li>Contact</li>
         </ul>
       </nav>
 
       <main className="main-content">
-        <h2>AI-Powered Shoe Recommendation</h2>
+        <h2>AI Skin Care Product Advisor</h2>
+        <p>Describe your skin concerns or goals and get personalized product suggestions from our AI!</p>
         <textarea
-          rows={5}
-          placeholder="e.g.,Recommend a shoe for sports..."
+          rows={8}
+          placeholder="e.g., I have oily skin and want a natural cleanser."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
         <button onClick={handleSubmit} disabled={loading}>
-          {loading ? 'Loading...' : 'Get Recommendation'}
+          {loading ? 'Finding products...' : 'Get Recommendations'}
         </button>
 
         {response && (
           <div className="response-box">
-            <h3>Recommended Shoe:</h3>
+            <h3>Recommended Products:</h3>
             <p>{response}</p>
-            {imageUrl && (
-              <img src={imageUrl} alt="Recommended Shoe" />
-            )}
           </div>
         )}
       </main>
 
-      
+      <footer>© 2025 GlowCare. All rights reserved.</footer>
     </div>
   );
 }
