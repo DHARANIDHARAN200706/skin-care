@@ -14,8 +14,8 @@ export default async function handler(req, res) {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
     const result = await model.generateContent([
-      `Suggest a stylish shoe based on the following need: ${message}`,
-      `Make it sound appealing, and if possible, provide an image URL (jpg, png or webp).`
+      `Suggest skincare products based on this customer input: "${message}".
+      Give product type, purpose, and if possible, brand suggestions.`
     ]);
 
     const response = await result.response;
